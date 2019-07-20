@@ -1,0 +1,29 @@
+repo: git@github.com:bsarrazin/Sekrit-iOS-Sekrit.git
+passphrase: SEKRIT_PASSPHRASE
+bundles:
+  - name: io.fourtytwo.Sekrit
+  - name: io.fourtytwo.Sekrit.beta
+  - name: io.fourtytwo.Sekrit.alpha
+bundled_files:
+  files:
+      - Sekrit/Resources/Assets.xcassets/AppIcon.appiconset/Icon.png
+      - Sekrit/Resources/Assets.xcassets/AppIcon.appiconset/Icon@2x.png
+      - Sekrit/Resources/Assets.xcassets/AppIcon.appiconset/Icon@3x.png
+      - Sekrit/Resources/Assets.xcassets/AppIcon.appiconset/Icon1024.jpg
+      - Sekrit/Resources/Assets.xcassets/AppIcon.appiconset/Icon40.png
+      - Sekrit/Resources/Assets.xcassets/AppIcon.appiconset/Icon40@2x.png
+      - Sekrit/Resources/Assets.xcassets/AppIcon.appiconset/Icon40@3x.png
+      - Sekrit/Resources/Assets.xcassets/AppIcon.appiconset/Icon60@2x.png
+      - Sekrit/Resources/Assets.xcassets/AppIcon.appiconset/Icon60@3x.png
+      - Sekrit/Resources/Assets.xcassets/AppIcon.appiconset/Icon76.png
+      - Sekrit/Resources/Assets.xcassets/AppIcon.appiconset/Icon76@2x.png
+      - Sekrit/Resources/Assets.xcassets/AppIcon.appiconset/Icon83.5@2x.png
+  encrypted:
+      - Sekrit/Source/Sekrit/Secrets.swift
+      - Sekrit/Supporting Files/Sekrit.debug.xcconfig
+      - Sekrit/Supporting Files/Sekrit.release.xcconfig
+shared_files:
+  encrypted:
+      - Sekrit/Supporting Files/Shared.debug.xcconfig
+      - Sekrit/Supporting Files/Shared.release.xcconfig
+  

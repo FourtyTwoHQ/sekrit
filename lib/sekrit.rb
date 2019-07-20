@@ -1,3 +1,5 @@
+require 'sekrit/bundle'
+require 'sekrit/config'
 require "sekrit/version"
 
 module Sekrit

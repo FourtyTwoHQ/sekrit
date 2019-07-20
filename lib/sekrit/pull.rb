@@ -9,17 +9,17 @@ module Sekrit
         end
 
         def copy_bundled_files(dir: String)
-            bundle = @config.bundles.select { |b| b.name == @bundle_id }.first
+            bundle = @config.bundles.select { |b| b.id == @bundle_id }.first
             raise Thor::Error, Rainbow("Cannot find bundle with id '#{@bundle_id}' in Sekritfile").red if bundle.nil?
 
             bundled_files = @config.bundled_files.files + bundle.files
             bundled_files.each do |f|
-                puts "Copying '#{dir}/#{bundle.name}/#{f}' to '#{f}'"
+                puts "Copying '#{dir}/#{bundle.id}/#{f}' to '#{f}'"
             end
 
             encrypted_files = @config.bundled_files.encrypted + bundle.encrypted
             encrypted_files.each do |f|
-                puts "Decryptingg and copying '#{dir}/#{bundle.name}/#{f}' to '#{f}'"
+                puts "Decryptingg and copying '#{dir}/#{bundle.id}/#{f}' to '#{f}'"
             end
         end
 

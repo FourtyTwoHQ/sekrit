@@ -1,9 +1,9 @@
 repo: git@github.com:bsarrazin/Sekrit-iOS-Sekrit.git
 passphrase: SEKRIT_PASSPHRASE
 bundles:
-  - name: io.fourtytwo.Sekrit
-  - name: io.fourtytwo.Sekrit.beta
-  - name: io.fourtytwo.Sekrit.alpha
+  - id: io.fourtytwo.Sekrit
+  - id: io.fourtytwo.Sekrit.beta
+  - id: io.fourtytwo.Sekrit.alpha
 bundled_files:
   files:
       - Sekrit/Resources/Assets.xcassets/AppIcon.appiconset/Icon.png
@@ -26,4 +26,3 @@ shared_files:
   encrypted:
       - Sekrit/Supporting Files/Shared.debug.xcconfig
       - Sekrit/Supporting Files/Shared.release.xcconfig
-  

@@ -1,3 +1,5 @@
+require 'rainbow'
+
 module Sekrit
 
     class Push
@@ -19,12 +21,12 @@ module Sekrit
                 dest = "#{dir}/#{bundle.id}/#{f}"
                 file_path = "#{Dir.pwd}/#{f}"
                 if File.exist?(file_path)
-                    log.debug "Preparing to copy '#{file_path}' to '#{dest}'"
+                    log.debug Rainbow("Preparing to copy '#{file_path}' to '#{dest}'").purple
                     FileUtils.mkdir_p(File.dirname(dest))
                     FileUtils.cp(f, dest)
-                    log.debug "Copied '#{file_path}' to '#{dest}'"
+                    log.debug Rainbow("Copied '#{file_path}' to '#{dest}'").purple
                 else
-                    log.warn("Could not find file at path '#{file_path}'")
+                    log.warn(Rainbow("Could not find file at path '#{file_path}'").yellow)
                 end
             end
 
@@ -33,16 +35,16 @@ module Sekrit
                 dest = "#{dir}/#{bundle.id}/#{f}"
                 file_path = "#{Dir.pwd}/#{f}"
                 if File.exist?(file_path)
-                    log.debug "Preparing to encrypt and copy '#{file_path}' to '#{dest}'"
+                    log.debug Rainbow("Preparing to encrypt and copy '#{file_path}' to '#{dest}'").purple
                     FileUtils.mkdir_p(File.dirname(dest))
                     FileUtils.cp(f, dest)
-                    log.debug "Copied '#{file_path}' to '#{dest}'"
+                    log.debug Rainbow("Copied '#{file_path}' to '#{dest}'").purple
 
-                    log.debug "Preparing to encrypt '#{dest}'"
+                    log.debug Rainbow("Preparing to encrypt '#{dest}'").purple
                     File.write(dest, @encoder.encode(string: File.read(dest)))
-                    log.debug "Encrypted '#{dest}'"
+                    log.debug Rainbow("Encrypted '#{dest}'").purple
                 else
-                    log.warn("Could not find file at path '#{file_path}'")
+                    log.warn(Rainbow("Could not find file at path '#{file_path}'").yellow)
                 end
             end
         end
@@ -52,12 +54,12 @@ module Sekrit
                 dest = "#{dir}/shared/#{f}"
                 file_path = "#{Dir.pwd}/#{f}"
                 if File.exist?(file_path)
-                    log.debug "Preparing to copy '#{file_path}' to '#{dest}'"
+                    log.debug Rainbow("Preparing to copy '#{file_path}' to '#{dest}'").purple
                     FileUtils.mkdir_p(File.dirname(dest))
                     FileUtils.cp(f, dest)
-                    log.debug "Copied '#{file_path}' to '#{dest}'"
+                    log.debug Rainbow("Copied '#{file_path}' to '#{dest}'").purple
                 else
-                    log.warn("Could not find file at path '#{file_path}'")
+                    log.warn(Rainbow("Could not find file at path '#{file_path}'").yellow)
                 end
             end
 
@@ -65,16 +67,16 @@ module Sekrit
                 dest = "#{dir}/shared/#{f}"
                 file_path = "#{Dir.pwd}/#{f}"
                 if File.exist?(file_path)
-                    log.debug "Preparing to encrypt and copy '#{file_path}' to '#{dest}'"
+                    log.debug Rainbow("Preparing to encrypt and copy '#{file_path}' to '#{dest}'").purple
                     FileUtils.mkdir_p(File.dirname(dest))
                     FileUtils.cp(f, dest)
-                    log.debug "Copied '#{file_path}' to '#{dest}'"
+                    log.debug Rainbow("Copied '#{file_path}' to '#{dest}'").purple
 
-                    log.debug "Preparing to encrypt '#{dest}'"
+                    log.debug Rainbow("Preparing to encrypt '#{dest}'").purple
                     File.write(dest, @encoder.encode(string: File.read(dest)))
-                    log.debug "Encrypted '#{dest}'"
+                    log.debug Rainbow("Encrypted '#{dest}'").purple
                 else
-                    log.warn("Could not find file at path '#{file_path}'")
+                    log.warn(Rainbow("Could not find file at path '#{file_path}'").yellow)
                 end
             end
         end

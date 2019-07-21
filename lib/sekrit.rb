@@ -61,7 +61,7 @@ module Sekrit
         private
 
         def configure_logger(verbose: Boolean)
-            log.level = verbose ? Logger::DEBUG : Logger::WARN
+            log.level = verbose ? Logger::DEBUG : Logger::INFO
         end
     end
 

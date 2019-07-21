@@ -41,11 +41,11 @@ module Sekrit
                 end
 
             rescue => error
-                delete_sekrit_dir_if_exist?
+                log.warn Rainbow("git repo at `#{sekrit_dir}/#{git_name}` was not deleted").yellow
                 raise Thor::Error, Rainbow(error).red
-            ensure
-                delete_sekrit_dir_if_exist?
             end
+
+            delete_sekrit_dir_if_exist?
         end
 
         private

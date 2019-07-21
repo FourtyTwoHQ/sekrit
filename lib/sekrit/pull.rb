@@ -1,3 +1,5 @@
+require 'rainbow'
+
 module Sekrit
 
     class Pull
@@ -19,11 +21,11 @@ module Sekrit
                 src = "#{dir}/#{bundle.id}/#{f}"
                 file_path = "#{Dir.pwd}/#{f}"
                 if File.exist?(src)
-                    log.debug "Preparing to copy '#{src}' to '#{file_path}'"
+                    log.debug Rainbow("Preparing to copy '#{src}' to '#{file_path}'").purple
                     FileUtils.cp(src, f)
-                    log.debug "Copied '#{src}' to '#{file_path}'"
+                    log.debug Rainbow("Copied '#{src}' to '#{file_path}'").purple
                 else
-                    log.warn("Could not find file at path '#{src}'")
+                    log.warn(Rainbow("Could not find file at path '#{src}'").yellow)
                 end
             end
 
@@ -32,15 +34,15 @@ module Sekrit
                 src = "#{dir}/#{bundle.id}/#{f}"
                 file_path = "#{Dir.pwd}/#{f}"
                 if File.exist?(src)
-                    log.debug "Preparing to decrypt and copy '#{src}' to '#{file_path}'"
+                    log.debug Rainbow("Preparing to decrypt and copy '#{src}' to '#{file_path}'").purple
                     FileUtils.cp(src, f)
-                    log.debug "Copied '#{src}' to '#{file_path}'"
+                    log.debug Rainbow("Copied '#{src}' to '#{file_path}'").purple
 
-                    log.debug "Preparing to decrypt '#{file_path}'"
+                    log.debug Rainbow("Preparing to decrypt '#{file_path}'").purple
                     File.write(file_path, @decoder.decode(string: File.read(file_path)))
-                    log.debug "Decrypted '#{file_path}'"
+                    log.debug Rainbow("Decrypted '#{file_path}'").purple
                 else
-                    log.warn("Could not find file at path '#{src}'")
+                    log.warn(Rainbow("Could not find file at path '#{src}'").yellow)
                 end
             end
         end
@@ -50,11 +52,11 @@ module Sekrit
                 src = "#{dir}/shared/#{f}"
                 file_path = "#{Dir.pwd}/#{f}"
                 if File.exist?(src)
-                    log.debug "Preparing to copy '#{src}' to '#{file_path}'"
+                    log.debug Rainbow("Preparing to copy '#{src}' to '#{file_path}'").purple
                     FileUtils.cp(src, f)
-                    log.debug "Copied '#{src}' to '#{file_path}'"
+                    log.debug Rainbow("Copied '#{src}' to '#{file_path}'").purple
                 else
-                    log.warn("Could not find file at path '#{src}'")
+                    log.warn(Rainbow("Could not find file at path '#{src}'").yellow)
                 end
             end
 
@@ -62,15 +64,15 @@ module Sekrit
                 src = "#{dir}/shared/#{f}"
                 file_path = "#{Dir.pwd}/#{f}"
                 if File.exist?(src)
-                    log.debug "Preparing to decrypt and copy '#{src}' to '#{file_path}'"
+                    log.debug Rainbow("Preparing to decrypt and copy '#{src}' to '#{file_path}'").purple
                     FileUtils.cp(src, f)
-                    log.debug "Copied '#{src}' to '#{file_path}'"
+                    log.debug Rainbow("Copied '#{src}' to '#{file_path}'").purple
 
-                    log.debug "Preparing to decrypt '#{file_path}'"
+                    log.debug Rainbow("Preparing to decrypt '#{file_path}'").purple
                     File.write(file_path, @decoder.decode(string: File.read(file_path)))
-                    log.debug "Dencrypted '#{file_path}'"
+                    log.debug Rainbow("Decrypted '#{file_path}'").purple
                 else
-                    log.warn("Could not find file at path '#{src}'")
+                    log.warn(Rainbow("Could not find file at path '#{src}'").yellow)
                 end
             end
         end

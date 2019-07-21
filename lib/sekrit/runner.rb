@@ -27,11 +27,19 @@ module Sekrit
 
                 git_name = @config.repo.split('/').last.chomp('.git')
                 git = Git.clone(@config.repo, git_name, path: sekrit_dir)
+                git.checkout(@options[:git_ref])
 
                 directory = "#{working_directory}/#{git_name}"
                 driver = @driver.call(bundle_id, @config, @passphrase)
                 driver.copy_bundled_files(dir: directory)
                 driver.copy_shared_files(dir: directory)
+
+                if driver.class == Push
+                    git.add
+                    git.commit "[Sekrit] Updating files for #{bundle_id}"
+                    git.push(git.remote('origin'), git.branch(@options[:git_ref]))
+                end
+
             rescue => error
                 delete_sekrit_dir_if_exist?
                 raise Thor::Error, Rainbow(error).red

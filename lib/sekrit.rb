@@ -4,6 +4,7 @@ require 'sekrit/bundle'
 require 'sekrit/config'
 require 'sekrit/decoder'
 require 'sekrit/encoder'
+require 'sekrit/logger'
 require "sekrit/pull"
 require "sekrit/push"
 require "sekrit/runner"
@@ -24,6 +25,7 @@ module Sekrit
         option :passphrase, aliases: :p, type: :string
         option :working_directory, aliases: :d, type: :string, default: '.'
         def push
+            configure_logger(verbose: options[:verbose])
             driver = lambda do |bundle_id, config, passphrase|
                 Push.new(
                     bundle_id: bundle_id,
@@ -43,6 +45,7 @@ module Sekrit
         option :passphrase, aliases: :p, type: :string
         option :working_directory, aliases: :d, type: :string, default: '.'
         def pull
+            configure_logger(verbose: options[:verbose])
             driver = lambda do |bundle_id, config, passphrase|
                 Pull.new(
                     bundle_id: bundle_id,
@@ -55,6 +58,11 @@ module Sekrit
             runner.run
         end
 
+        private
+
+        def configure_logger(verbose: Boolean)
+            log.level = verbose ? Logger::DEBUG : Logger::WARN
+        end
     end
 
 end

@@ -26,8 +26,14 @@ module Sekrit
                 raise Thor::Error, Rainbow("passphrase cannot be empty").red if @passphrase.empty?
 
                 git_name = @config.repo.split('/').last.chomp('.git')
-                git = Git.clone(@config.repo, git_name, path: sekrit_dir)
-                git.checkout(@options[:git_ref])
+                git = Git.clone(@config.repo, git_name, path: sekrit_dir, log: log)
+                begin
+                    git.checkout(@options[:git_ref])
+                    log.info Rainbow("Checking out #{@options[:git_ref]}").blue
+                rescue
+                    git.branch(@options[:git_ref]).checkout
+                    log.info Rainbow("Creating new branch #{@options[:git_ref]}").blue
+                end
 
                 directory = "#{working_directory}/#{git_name}"
                 driver = @driver.call(bundle_id, @config, @passphrase)
@@ -35,9 +41,13 @@ module Sekrit
                 driver.copy_shared_files(dir: directory)
 
                 if driver.class == Push
+                    log.info Rainbow("git adding...").green
                     git.add
+                    log.info Rainbow("git committing...").green
                     git.commit "[Sekrit] Updating files for #{bundle_id}"
+                    log.info Rainbow("git pushing...").green
                     git.push(git.remote('origin'), git.branch(@options[:git_ref]))
+                    log.info Rainbow("git completed!").green
                 end
 
             rescue => error

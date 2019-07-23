@@ -12,12 +12,16 @@ module Sekrit
             raise Thor::Error, Rainbow("Bundle id cannot be nil").red if @bundle_id.nil?
         end
 
+        def bundle
+            @config.bundles.select { |b| b.id == @bundle_id }.first
+        end
+
         def copy_bundled_files(dir: String)
-            bundle = @config.bundles.select { |b| b.id == @bundle_id }.first
             raise Thor::Error, Rainbow("Cannot find bundle with id '#{@bundle_id}' in Sekritfile").red if bundle.nil?
 
-            bundled_files = @config.bundled_files.files + bundle.files
-            bundled_files.each do |f|
+            config_bundled_files = @config.bundled_files.nil? ? [] : @config.bundled_files.files
+            config_bundled_files += bundle.files
+            config_bundled_files.each do |f|
                 dest = "#{dir}/#{bundle.id}/#{f}"
                 file_path = "#{Dir.pwd}/#{f}"
                 if File.exist?(file_path)
@@ -30,8 +34,9 @@ module Sekrit
                 end
             end
 
-            encrypted_files = @config.bundled_files.encrypted + bundle.encrypted
-            encrypted_files.each do |f|
+            config_encrypted_files = @config.bundled_files.nil? ? [] : @config.bundled_files.encrypted
+            config_encrypted_files += bundle.encrypted
+            config_encrypted_files.each do |f|
                 dest = "#{dir}/#{bundle.id}/#{f}"
                 file_path = "#{Dir.pwd}/#{f}"
                 if File.exist?(file_path)
@@ -50,7 +55,9 @@ module Sekrit
         end
 
         def copy_shared_files(dir: String)
-            @config.shared_files.files.each do |f|
+            config_shared_files = @config.shared_files.nil? ? [] : @config.shared_files.files
+            config_shared_files += bundle.files
+            config_shared_files.each do |f|
                 dest = "#{dir}/shared/#{f}"
                 file_path = "#{Dir.pwd}/#{f}"
                 if File.exist?(file_path)
@@ -63,7 +70,9 @@ module Sekrit
                 end
             end
 
-            @config.shared_files.encrypted.each do |f|
+            config_encrypted_files = @config.shared_files.nil? ? [] : @config.shared_files.encrypted
+            config_encrypted_files += bundle.encrypted
+            config_encrypted_files.each do |f|
                 dest = "#{dir}/shared/#{f}"
                 file_path = "#{Dir.pwd}/#{f}"
                 if File.exist?(file_path)

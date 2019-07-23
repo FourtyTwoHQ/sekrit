@@ -52,7 +52,7 @@ module Sekrit
 
             rescue => error
                 log.warn Rainbow("git repo at `#{sekrit_dir}/#{git_name}` was not deleted").yellow
-                raise Thor::Error, Rainbow(error).red
+                raise Thor::Error, Rainbow(error.full_message).red
             end
 
             delete_sekrit_dir_if_exist?
@@ -78,11 +78,24 @@ module Sekrit
             rows << ['bundle_id', bundle_id]
             rows << ['repo', @config.repo]
             rows << ['passphrase key', @config.passphrase]
-            rows << ['shared_files', @config.shared_files.files.nil? ? '<none>' : @config.shared_files.files.map { |f| '- ' + f }.join("\n")]
-            rows << ['shared_encrypted', @config.shared_files.encrypted.nil? ? '<none>' : @config.shared_files.encrypted.map { |f| '- ' + f }.join("\n")]
-            rows << ['bundled_files', @config.bundled_files.files.nil? ? '<none>' : @config.bundled_files.files.map { |f| '- ' + f }.join("\n")]
-            rows << ['bundled_encrypted', @config.bundled_files.encrypted.nil? ? '<none>' : @config.bundled_files.encrypted.map { |f| '- ' + f }.join("\n")]
-            rows << ['bundles', @config.bundles.map { |b| b.id }.join("\n") ]
+            rows << ['bundles', @config.bundles.map { |b| '- ' + b.id }.join("\n") ]
+
+            if @config.shared_files.nil?
+                rows << ['shared_files', '<does not exist in Sekritfile>']
+            else
+                rows << ['shared_files', @config.shared_files.files.nil? ? '<none>' : @config.shared_files.files.map { |f| '- ' + f }.join("\n")]
+                rows << ['shared_encrypted', @config.shared_files.encrypted.nil? ? '<none>' : @config.shared_files.encrypted.map { |f| '- ' + f }.join("\n")]
+            end
+
+            if @config.bundled_files.nil?
+                rows << ['bundled_files', '<does not exist in Sekritfile>']
+            else
+                rows << ['bundled_files', @config.bundled_files.files.nil? ? '<none>' : @config.bundled_files.files.map { |f| '- ' + f }.join("\n")]
+                rows << ['bundled_encrypted', @config.bundled_files.encrypted.nil? ? '<none>' : @config.bundled_files.encrypted.map { |f| '- ' + f }.join("\n")]
+            end
+
+            rows << ['Sekrifile', @config.raw]
+
             table = Terminal::Table.new(title: title, headings: headings, rows: rows, style: { all_separators: true })
             puts("\n" + table.to_s + "\n")
         end

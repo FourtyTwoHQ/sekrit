@@ -1,16 +1,16 @@
 require 'logger'
 
 class Object
-    def self.logger
-        if @logger.nil?
-            @logger = Logger.new(STDOUT)
-            @logger.level = Logger::DEBUG
-        end
-
-        @logger
+  def self.logger
+    if @logger.nil?
+      @logger = Logger.new(STDOUT)
+      @logger.level = Logger::DEBUG
     end
 
-    def log
-        Object.logger
-    end
+    @logger
+  end
+
+  def log
+    Object.logger
+  end
 end

@@ -26,12 +26,12 @@ Gem::Specification.new do |spec|
     spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
     spec.require_paths = ['lib']
 
-    spec.add_development_dependency 'bundler', '~> 2.0'
-    spec.add_development_dependency 'minitest', '~> 5.0'
-    spec.add_development_dependency 'pry-byebug', '~> 3.7.0'
-    spec.add_development_dependency 'rake', '~> 12'
-    spec.add_runtime_dependency 'git', '~> 1.5.0'
-    spec.add_runtime_dependency 'rainbow', '~> 3.0.0'
-    spec.add_runtime_dependency 'terminal-table', '~> 1.8.0'
-    spec.add_runtime_dependency 'thor', '~> 0.20.3'
+    spec.add_development_dependency 'bundler', '~> 2'
+    spec.add_development_dependency 'minitest', '~> 5'
+    spec.add_development_dependency 'pry-byebug', '~> 3'
+    spec.add_development_dependency 'rake', '~> 13'
+    spec.add_runtime_dependency 'git', '~> 1'
+    spec.add_runtime_dependency 'rainbow', '~> 3'
+    spec.add_runtime_dependency 'terminal-table', '~> 1'
+    spec.add_runtime_dependency 'thor', '~> 1'
 end

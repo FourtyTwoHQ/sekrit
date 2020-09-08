@@ -33,5 +33,5 @@ Gem::Specification.new do |spec|
     spec.add_runtime_dependency 'git', '~> 1'
     spec.add_runtime_dependency 'rainbow', '~> 3'
     spec.add_runtime_dependency 'terminal-table', '~> 1'
-    spec.add_runtime_dependency 'thor', '~> 1'
+    spec.add_runtime_dependency 'thor', '~> 0.19'
 end
